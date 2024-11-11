@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DEVC>
-    <CTEXT>Package for ADS Printing</CTEXT>
+    <CTEXT>CLOUD标准化</CTEXT>
    </DEVC>
   </asx:values>
  </asx:abap>
