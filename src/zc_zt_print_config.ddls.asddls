@@ -9,6 +9,8 @@ define root view entity ZC_ZT_PRINT_CONFIG
       TemplateName,
       ServiceDefinitionName,
       IsExternalProvidedData,
+      XmlSource,
+      Struct,
       Template,
       MimeType,
       FileName,

@@ -2,11 +2,15 @@
 @EndUserText.label: '##GENERATED ZZT_PRINT_CONFIG'
 define root view entity ZR_ZT_PRINT_CONFIG
   as select from zzt_print_config
+  
 {
   key uuid                      as UUID,
       template_name             as TemplateName,
       service_definition_name   as ServiceDefinitionName,
       is_external_provided_data as IsExternalProvidedData,
+
+      xml_source                as XmlSource,
+      struct                    as Struct,
 
       // 设置为文件模板，存放Adobe liveCycle 导出的打印文件
       @Semantics.largeObject:

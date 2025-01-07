@@ -50,6 +50,16 @@ annotate view ZC_ZT_PRINT_CONFIG with
   @UI.hidden: true
   IsExternalProvidedData;
 
+
+  @UI.lineItem: [ { position: 30 , importance: #MEDIUM, label:'数据来源' } ]
+  @UI.identification: [ { position: 30 , label:'数据来源'} ]
+  @Consumption.valueHelpDefinition: [{  entity: {name: 'ZR_VH_PRINT_SOURCE' , element: 'value'  } }]
+  XmlSource;
+
+  @UI.lineItem: [ { position: 35 , importance: #MEDIUM, label:'自定义结构' } ]
+  @UI.identification: [ { position: 35 , label:'自定义结构'} ]
+  Struct;
+
   @UI.lineItem: [ {
     position: 40 ,
     importance: #MEDIUM,
@@ -87,7 +97,7 @@ annotate view ZC_ZT_PRINT_CONFIG with
 
   @UI.lineItem: [ { position: 70 ,  importance: #MEDIUM,label: 'XSD 文件' },
                   { type: #FOR_ACTION, dataAction: 'zzxsd', label: '更新数据源'} ]
-  @UI.identification: [ {  position: 70, label: 'XSD 文件'} , 
+  @UI.identification: [ {  position: 70, label: 'XSD 文件'} ,
                         { type: #FOR_ACTION, dataAction: 'zzxsd', label: '更新数据源'}  ]
   XsdFile;
 

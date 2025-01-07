@@ -32,7 +32,7 @@ authorization master ( global )
   draft determine action Prepare;
   determination createXSDFile on save { field ServiceDefinitionName; }
 
-  action  zzxsd result [1] $self;
+  action zzxsd result [1] $self;
 
 
   mapping for zzt_print_config
@@ -41,6 +41,8 @@ authorization master ( global )
       TemplateName           = template_name;
       ServiceDefinitionName  = service_definition_name;
       IsExternalProvidedData = is_external_provided_data;
+      XmlSource              = xml_source;
+      Struct                 = struct;
       Template               = template;
       MimeType               = mime_type;
       FileName               = file_name;

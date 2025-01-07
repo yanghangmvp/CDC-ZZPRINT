@@ -26,22 +26,34 @@ CLASS lhc_zr_zt_print_config IMPLEMENTATION.
 *&---出来数据文件
     LOOP AT results ASSIGNING FIELD-SYMBOL(<result>).
       lv_error = abap_false.
-      TRY.
-          "FDP utils
-          " 通过数据服务获取对应的xsd 文件
-          " 获取数据服务类
-          DATA(lo_fdp_util) = cl_fp_fdp_services=>get_instance( CONV zzeservice( <result>-servicedefinitionname ) ).
+      CASE <result>-xmlsource.
+        WHEN '1'.
+          TRY.
+              "FDP utils
+              " 通过数据服务获取对应的xsd 文件
+              " 获取数据服务类
+              DATA(lo_fdp_util) = cl_fp_fdp_services=>get_instance( CONV zzeservice( <result>-servicedefinitionname ) ).
+              " 获取数据服务xsd 文件
+              <result>-xsdfile = lo_fdp_util->get_xsd(  ).
+              " 设置xsd 文件名
+              <result>-xsdfilename = |{ <result>-servicedefinitionname }.xsd |.
+              " 设置xsd 存储文件类型
+              <result>-xsdtype = 'application/xml'.
+            CATCH cx_fp_fdp_error INTO DATA(lx_fdp).
+              lv_message = lx_fdp->get_longtext(  ).
+              lv_error = abap_true.
+          ENDTRY.
+
+        WHEN '2'.
+
           " 获取数据服务xsd 文件
-          <result>-xsdfile = lo_fdp_util->get_xsd(  ).
+          <result>-xsdfile = NEW zzcl_print_tool( <result>-struct )->get_xsd( ).
           " 设置xsd 文件名
-          <result>-xsdfilename = |{ <result>-servicedefinitionname }.xsd |.
+          <result>-xsdfilename = |{ <result>-struct }.xsd |.
           " 设置xsd 存储文件类型
           <result>-xsdtype = 'application/xml'.
-        CATCH cx_fp_fdp_error INTO DATA(lx_fdp).
-          lv_message = lx_fdp->get_longtext(  ).
-*              lv_message = lx_ads->get_longtext(  ).
-          lv_error = abap_true.
-      ENDTRY.
+
+      ENDCASE.
       " 报错消息处理
       IF lv_error = abap_true.
         APPEND VALUE #(  uuid = <result>-uuid
@@ -80,22 +92,39 @@ CLASS lhc_zr_zt_print_config IMPLEMENTATION.
 *&---出来数据文件
     LOOP AT results ASSIGNING FIELD-SYMBOL(<result>).
       lv_error = abap_false.
-      TRY.
-          "FDP utils
-          " 通过数据服务获取对应的xsd 文件
-          " 获取数据服务类
-          DATA(lo_fdp_util) = cl_fp_fdp_services=>get_instance( CONV zzeservice( <result>-servicedefinitionname ) ).
+
+      CASE <result>-xmlsource.
+        WHEN '1'.
+          TRY.
+              "FDP utils
+              " 通过数据服务获取对应的xsd 文件
+              " 获取数据服务类
+              DATA(lo_fdp_util) = cl_fp_fdp_services=>get_instance( CONV zzeservice( <result>-servicedefinitionname ) ).
+              " 获取数据服务xsd 文件
+              <result>-xsdfile = lo_fdp_util->get_xsd(  ).
+              " 设置xsd 文件名
+              <result>-xsdfilename = |{ <result>-servicedefinitionname }.xsd |.
+              " 设置xsd 存储文件类型
+              <result>-xsdtype = 'application/xml'.
+            CATCH cx_fp_fdp_error INTO DATA(lx_fdp).
+              lv_message = lx_fdp->get_longtext(  ).
+              lv_error = abap_true.
+          ENDTRY.
+
+        WHEN '2'.
+
           " 获取数据服务xsd 文件
-          <result>-xsdfile = lo_fdp_util->get_xsd(  ).
+          <result>-xsdfile = NEW zzcl_print_tool( <result>-struct )->get_xsd( ).
           " 设置xsd 文件名
-          <result>-xsdfilename = |{ <result>-servicedefinitionname }.xsd |.
+          <result>-xsdfilename = |{ <result>-struct }.xsd |.
           " 设置xsd 存储文件类型
           <result>-xsdtype = 'application/xml'.
-        CATCH cx_fp_fdp_error INTO DATA(lx_fdp).
-          lv_message = lx_fdp->get_longtext(  ).
-*              lv_message = lx_ads->get_longtext(  ).
-          lv_error = abap_true.
-      ENDTRY.
+
+      ENDCASE.
+
+
+
+
       " 报错消息处理
       IF lv_error = abap_true.
         APPEND VALUE #(  uuid = <result>-uuid
