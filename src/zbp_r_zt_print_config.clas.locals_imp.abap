@@ -8,7 +8,9 @@ CLASS lhc_zr_zt_print_config DEFINITION INHERITING FROM cl_abap_behavior_handler
       createxsdfile FOR DETERMINE ON SAVE
         IMPORTING keys FOR zr_zt_print_config~createxsdfile,
       zzxsd FOR MODIFY
-        IMPORTING keys FOR ACTION config~zzxsd RESULT result.
+        IMPORTING keys FOR ACTION config~zzxsd RESULT result,
+      validatexmlsource FOR VALIDATE ON SAVE
+        IMPORTING keys FOR config~validatexmlsource.
 ENDCLASS.
 
 CLASS lhc_zr_zt_print_config IMPLEMENTATION.
@@ -161,6 +163,51 @@ CLASS lhc_zr_zt_print_config IMPLEMENTATION.
 
     result =  VALUE #( FOR file IN results ( %tky   = file-%tky
                                              %param =  file ) ).
+  ENDMETHOD.
+
+  METHOD validatexmlsource.
+*&---获取ui 界面实体数据内容
+    READ ENTITIES OF zr_zt_print_config IN LOCAL MODE
+    ENTITY config ALL FIELDS WITH CORRESPONDING #( keys )
+    RESULT DATA(results).
+
+    LOOP AT results INTO DATA(result).
+      APPEND VALUE #(  %tky               = result-%tky
+                       %state_area        = 'VALIDATE_XMLSOURCE' ) TO reported-config.
+
+      CASE result-xmlsource.
+        WHEN '1'.
+          IF result-servicedefinitionname IS INITIAL.
+            APPEND VALUE #( %tky = result-%tky ) TO failed-config.
+            APPEND VALUE #( %tky            = result-%tky
+                            %state_area     = 'VALIDATE_XMLSOURCE'
+                            %msg            = new_message(
+                                                 id       = '00'
+                                                 number   = 000
+                                                 severity = if_abap_behv_message=>severity-error
+                                                 v1       = '输入标准数据源信息'
+                                                )
+                            %element-servicedefinitionname = if_abap_behv=>mk-on
+                            ) TO reported-config.
+          ENDIF.
+        WHEN '2'.
+          IF result-struct IS INITIAL.
+            APPEND VALUE #( %tky = result-%tky ) TO failed-config.
+            APPEND VALUE #( %tky            = result-%tky
+                            %state_area     = 'VALIDATE_XMLSOURCE'
+                            %msg            = new_message(
+                                                 id       = '00'
+                                                 number   = 000
+                                                 severity = if_abap_behv_message=>severity-error
+                                                 v1       = '输入自定义数据源信息'
+                                                )
+                            %element-struct = if_abap_behv=>mk-on
+                            ) TO reported-config.
+          ENDIF.
+
+      ENDCASE.
+    ENDLOOP.
+
   ENDMETHOD.
 
 ENDCLASS.

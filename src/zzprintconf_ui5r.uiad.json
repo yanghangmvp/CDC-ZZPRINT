@@ -1,0 +1,34 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "打印配置",
+    "originalLanguage": "zh",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD"
+  },
+  "ui5AppDetails": {
+    "appId": "zzprintconf"
+  },
+  "navigation": {
+    "targetMappingId": "UI5R_0990768116810223201928F5D35BB5A78FC0AD0D_TM",
+    "semanticObject": "zzprintconf",
+    "action": "config",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "UI5R_0990768116810223201928F5D35BB5A78FC0AD0D_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "打印配置",
+        "subtitle": "打印配置"
+      }
+    }
+  ]
+}

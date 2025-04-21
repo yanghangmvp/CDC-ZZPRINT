@@ -20,6 +20,8 @@ authorization master ( global )
   field ( numbering : managed )
   UUID;
 
+  field ( mandatory )
+  XmlSource;
 
   create;
   update;
@@ -31,6 +33,7 @@ authorization master ( global )
   draft action Resume;
   draft determine action Prepare;
   determination createXSDFile on save { field ServiceDefinitionName; }
+  validation validateXmlSource on save { create; field ServiceDefinitionName, Struct, Class; }
 
   action zzxsd result [1] $self;
 
@@ -43,6 +46,7 @@ authorization master ( global )
       IsExternalProvidedData = is_external_provided_data;
       XmlSource              = xml_source;
       Struct                 = struct;
+      Class                  = class;
       Template               = template;
       MimeType               = mime_type;
       FileName               = file_name;
