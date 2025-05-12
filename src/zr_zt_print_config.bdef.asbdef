@@ -31,11 +31,15 @@ authorization master ( global )
   draft action Activate optimized;
   draft action Discard;
   draft action Resume;
-  draft determine action Prepare;
+
   determination createXSDFile on save { field ServiceDefinitionName; }
-  validation validateXmlSource on save { create; field ServiceDefinitionName, Struct, Class; }
+  validation validateXmlSource on save { create; update; field ServiceDefinitionName, Struct, Class; }
 
   action zzxsd result [1] $self;
+
+  draft determine action Prepare
+  {
+    validation validateXmlSource; }
 
 
   mapping for zzt_print_config

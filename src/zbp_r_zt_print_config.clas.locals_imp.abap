@@ -182,7 +182,7 @@ CLASS lhc_zr_zt_print_config IMPLEMENTATION.
             APPEND VALUE #( %tky            = result-%tky
                             %state_area     = 'VALIDATE_XMLSOURCE'
                             %msg            = new_message(
-                                                 id       = '00'
+                                                 id       = 'ZGL01'
                                                  number   = 000
                                                  severity = if_abap_behv_message=>severity-error
                                                  v1       = '输入标准数据源信息'
@@ -196,7 +196,7 @@ CLASS lhc_zr_zt_print_config IMPLEMENTATION.
             APPEND VALUE #( %tky            = result-%tky
                             %state_area     = 'VALIDATE_XMLSOURCE'
                             %msg            = new_message(
-                                                 id       = '00'
+                                                 id       = 'ZGL01'
                                                  number   = 000
                                                  severity = if_abap_behv_message=>severity-error
                                                  v1       = '输入自定义数据源信息'

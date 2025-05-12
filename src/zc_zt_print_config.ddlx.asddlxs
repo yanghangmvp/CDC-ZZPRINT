@@ -5,6 +5,7 @@
     typeNamePlural: '打印模板'
   }
 }
+
 annotate view ZC_ZT_PRINT_CONFIG with
 {
   @UI.facet: [ {    id: 'idIdentification',
@@ -51,7 +52,7 @@ annotate view ZC_ZT_PRINT_CONFIG with
 
   @UI.lineItem: [ { position: 30 , importance: #MEDIUM, label:'数据来源' } ]
   @UI.identification: [ { position: 30 , label:'数据来源'} ]
-  @Consumption.valueHelpDefinition: [{  entity: {name: 'ZR_VH_PRINT_SOURCE' , element: 'value'  } }]
+  @Consumption.valueHelpDefinition: [{  entity: {name: 'ZR_VH_PRINT_SOURCE' , element: 'value' } , useForValidation: true}]
   XmlSource;
 
   @UI.fieldGroup: [ { position: 10 , qualifier: 'STD_FG' , label: 'CDS 数据源' } ]
