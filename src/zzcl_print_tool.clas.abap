@@ -68,7 +68,7 @@ CLASS ZZCL_PRINT_TOOL IMPLEMENTATION.
 
   METHOD get_dd03.
     DATA:ls_dd03 TYPE me->ty_dd03.
-    DATA(lo_structure) = xco_cp_abap_dictionary=>structure( iv_struct ).
+    DATA(lo_structure) = xco_cp_abap_dictionary=>structure( to_upper( iv_struct ) ).
     DATA(lt_components) = lo_structure->components->all->get( ).
     LOOP AT lt_components INTO DATA(ls_components).
       CLEAR:ls_dd03.

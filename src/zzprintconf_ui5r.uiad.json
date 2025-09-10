@@ -1,5 +1,5 @@
 {
-  "formatVersion": "1",
+  "formatVersion": "2",
   "header": {
     "description": "打印配置",
     "originalLanguage": "zh",
@@ -7,7 +7,8 @@
   },
   "generalInformation": {
     "appType": "ui5",
-    "catalogId": "SAP_TC_UI5_REPO_UIAD"
+    "catalogId": "SAP_TC_UI5_REPO_UIAD",
+    "targetMappingTitle": "打印配置"
   },
   "ui5AppDetails": {
     "appId": "zzprintconf"

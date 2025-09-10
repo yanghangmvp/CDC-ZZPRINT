@@ -43,5 +43,4 @@ define root view entity ZR_ZT_PRINT_CONFIG
       last_changed_at           as LastChangedAt,
       @Semantics.systemDateTime.localInstanceLastChangedAt: true
       local_last_changed_at     as LocalLastChangedAt
-
 }

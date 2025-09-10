@@ -99,9 +99,9 @@ CLASS lhc_log IMPLEMENTATION.
           create_printing = VALUE #( %cid                   = key-%cid
                                      templateuuid           = ls_config-uuid
                                      templatename           = ls_config-templatename
-                                     isexternalprovideddata = key-%param-isexternalprovideddata
+*                                     isexternalprovideddata = key-%param-isexternalprovideddata
                                      providedkeys           = key-%param-providedkeys
-                                     externalprovideddata   = key-%param-externalprovideddata
+*                                     externalprovideddata   = key-%param-externalprovideddata
                                      sendtoprintqueue       = key-%param-sendtoprintqueue
                                      numberofcopies         = key-%param-numberofcopies
                                      printqueue             = key-%param-printqueue
@@ -190,9 +190,9 @@ CLASS lhc_log IMPLEMENTATION.
           WHEN '2'."自定义结构取数
             TRY.
                 DATA:lo_tool  TYPE REF TO object.
-                CREATE OBJECT lo_tool TYPE (ls_template-struct).
+                CREATE OBJECT lo_tool TYPE (ls_template-class).
 
-                CALL METHOD lo_tool->('GET_DATA')
+                CALL METHOD lo_tool->('ZZIF_PRINT_DATA~GET_DATA')
                   EXPORTING
                     iv_key     = <fo_data>
                   IMPORTING
@@ -201,6 +201,7 @@ CLASS lhc_log IMPLEMENTATION.
                     rv_xml     = lv_xml.
 
               CATCH cx_root INTO lr_root.
+                DATA(lv_msg) = lr_root->get_longtext( ).
             ENDTRY.
         ENDCASE.
         " 获取完成后释放，否则下次数据类型不更新
@@ -255,7 +256,7 @@ CLASS lhc_log IMPLEMENTATION.
       <file>-filename = |{ lv_filename }.pdf|.
       <file>-mimetypedata = 'application/xml'.
       <file>-datafilename = 'Data.xml'.
-
+      <file>-externalprovideddata = lv_xml.
 *&---若打印参数为空，则直接打印pdf 文件，否则为打印队列，调用打印队列服务CPM
       IF <file>-printqueue IS INITIAL.
         <file>-printqueue = 'COMMON'.

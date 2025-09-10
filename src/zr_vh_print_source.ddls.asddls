@@ -5,7 +5,7 @@ define view entity ZR_VH_PRINT_SOURCE
   as select from DDCDS_CUSTOMER_DOMAIN_VALUE_T( p_domain_name: 'ZZDXMLSOURCE' ) as a
 
 {
-  key a.value_low as value,
+  key a.value_low as XmlSource,
       a.text
 }
 

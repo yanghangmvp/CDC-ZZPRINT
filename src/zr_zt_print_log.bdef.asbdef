@@ -36,7 +36,7 @@ with additional save   // add this line
 
 
   determination createPrintFile on save { create; }
-  static factory action CreatePrintRecord parameter ZR_ZT_PRINT_PARAMETER [1];
+  static factory action CreatePrintRecord parameter ZR_ZT_PRINT_PARAMETER [1] ;
 
   mapping for zzt_print_log
     {
